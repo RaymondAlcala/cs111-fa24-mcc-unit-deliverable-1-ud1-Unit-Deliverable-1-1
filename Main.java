@@ -26,6 +26,7 @@ public class Main
     TriangleSolver triangle = new TriangleSolver();
     triangle.setTriangle();
     triangle.setSidesAndAngles();
+    triangle.solveTriangle();
     
   }
   /***** STATIC METHODS *****/
