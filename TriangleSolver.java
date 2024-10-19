@@ -3,6 +3,7 @@ import java.util.*;
 
 public class TriangleSolver {
 
+    private boolean isRight = false;
     private boolean triangleImpossible = false;
     private int numAngles = 0;
     private int numSides = 0;
@@ -84,7 +85,7 @@ public class TriangleSolver {
      * 
      * @return returns true if num is greater than 0
      */
-    public boolean nonZero(double num)
+    public static boolean nonZero(double num)
     {
         if (num > 0)
         {
@@ -101,7 +102,7 @@ public class TriangleSolver {
      * 
      * @return returns true if num is greater than 0
      */
-    public boolean nonZero(double num1, double num2, double num3)
+    public static boolean nonZero(double num1, double num2, double num3)
     {
         if (num1 > 0 && num1 > 0 && num3 > 0)
         {
@@ -330,7 +331,7 @@ public class TriangleSolver {
     }
 
     /**
-     * 
+     * Checks if triangle has 0, 1, or 2 solutions and prints out the solutions with the triangle shape, if impossible doesn't print anything other than impossible message
      */
     public void solveTriangle()
     {
@@ -378,6 +379,9 @@ public class TriangleSolver {
         }
     }
 
+    /**
+     * Solves for other two sides if at least two angles and one side are known
+     */
     public void oneSideSolve()
     {
         if (nonZero(sideA) && nonZero(angleA))
@@ -397,6 +401,9 @@ public class TriangleSolver {
         }
     }
 
+    /**
+     * Solves for other two angles if at least two sides are known and only one angle
+     */
     public void oneAngleSolve()
     {
         if (nonZero(angleA))
@@ -416,6 +423,9 @@ public class TriangleSolver {
         }
     }
 
+    /**
+     * Solves for all angles if all sides are known
+     */
     public void sssSolve()
     {
         angleA = Math.toDegrees(Math.acos((sideA * sideA - sideB * sideB - sideC * sideC)/ (-2.0 * sideB * sideC)));
@@ -423,6 +433,9 @@ public class TriangleSolver {
         twoAngleSolve();
     }
 
+    /**
+     * Solves all SAS triangles
+     */
     public void sasSolve()
     {
         if (!isAmbiguous())
@@ -443,6 +456,9 @@ public class TriangleSolver {
 
     }
 
+    /**
+     * If triangle is ambiguous (shown through isAmbiguous method) solves and prints one triangle and finds the other possiblity
+     */
     public void ambiguousSolve()
     {
         if (isAmbiguous())
@@ -543,6 +559,9 @@ public class TriangleSolver {
         }
     }
 
+    /**
+     * Prints formatted triangle with inputted angles and sides
+     */
     public void triangleShape()
     {
         String triangle = String.format("%14.2f\r\n" + 
@@ -558,8 +577,9 @@ public class TriangleSolver {
         infoDump();
     }
 
-    
-
+    /**
+     * Prints angles and sides along with their values
+     */
     public void infoDump()
     {
         System.out.printf("A:%f\nB:%f\nC:%s\na:%f\n" + //
@@ -568,13 +588,5 @@ public class TriangleSolver {
                         "",sideA,sideB,sideC,angleA,angleB,angleC);
     }
 
-    public void infoDump(double A, double B, double C, double a, double b, double c)
-    {
-        System.out.printf("A:%f\nB:%f\nC:%s\na:%f\n" + //
-                        "b:%f\n" + //
-                        "c:%f\n" + //
-                        "",A, B, C, a, b, c);
-    }
-
-
+    
 }
